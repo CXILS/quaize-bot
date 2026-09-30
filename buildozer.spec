@@ -43,7 +43,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = pip==24.0,hostpython3==3.9.25,python3==3.9.25,kivy,playwright,requests,pillow,python-dotenv,gigachat
+requirements = python3,kivy
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
