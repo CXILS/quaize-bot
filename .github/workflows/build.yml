@@ -1,0 +1,40 @@
+name: Build Quaize Bot APK
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+
+      - name: Install Buildozer
+        run: |
+          pip install --upgrade pip
+          pip install buildozer cython
+
+      - name: Create .env from secret
+        run: |
+          echo "GIGACHAT_AUTH_KEY=${{ secrets.GIGACHAT_AUTH_KEY }}" > .env
+
+      - name: Build APK with Buildozer
+        run: |
+          export CMAKE_POLICY_VERSION_MINIMUM=3.5
+          buildozer -v android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: quaize-bot-apk
+          path: bin/*.apk
