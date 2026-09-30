@@ -18,6 +18,15 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y build-essential git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
+          
+      - name: Accept Android SDK licenses
+        run: |
+          mkdir -p ~/.android
+          touch ~/.android/repositories.cfg
+          yes | sdkmanager --licenses || true
+        env:
+          JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
+          
       - name: Install Buildozer
         run: |
           pip install --upgrade pip
