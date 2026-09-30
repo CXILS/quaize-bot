@@ -4,7 +4,8 @@
 # See the end of the file for more details and warnings about common mistakes.
 
 [app]
-
+android.accept_sdk_license = True
+android.build_tools_version = 34.0.0
 # (str) Title of your application
 title = My Application
 
