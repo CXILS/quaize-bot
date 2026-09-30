@@ -1,0 +1,7 @@
+.env
+.buildozer/
+bin/
+__pycache__/
+*.apk
+*.png
+page_dump.html
